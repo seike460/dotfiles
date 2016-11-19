@@ -13,8 +13,6 @@ set hidden
 set showcmd
 
 " 見た目系
-" 行末の1文字先までカーソルを移動できるように
-set virtualedit=onemore
 " インデントはスマートインデント
 set smartindent
 " ビープ音を可視化
