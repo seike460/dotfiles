@@ -19,8 +19,6 @@ set smartindent
 set visualbell
 " 括弧入力時の対応する括弧を表示
 set showmatch
-" ステータスラインを常に表示
-set laststatus=2
 " コマンドラインの補完
 set wildmode=list:longest
 
@@ -29,6 +27,9 @@ set wildmode=list:longest
 set tabstop=2
 " 行頭でのTab文字の表示幅
 set shiftwidth=2
+set softtabstop=2
+set autoindent
+set smartindent
 
 " 検索系
 " 検索文字列が小文字の場合は大文字小文字を区別なく検索する
@@ -49,3 +50,31 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 colorscheme ron
 " ダーク系のカラースキームを使う
 set background=dark
+
+" ステータスライン系
+" ステータスラインにコマンドを表示
+set showcmd
+" ステータスラインを常に表示
+set laststatus=2
+" ファイルナンバー表示
+set statusline=[%n]
+" ホスト名表示
+set statusline+=%{matchstr(hostname(),'\\w\\+')}@
+" ファイル名表示
+set statusline+=%<%F
+" 変更のチェック表示
+set statusline+=%m
+" 読み込み専用かどうか表示
+set statusline+=%r
+" ファイルフォーマット表示
+set statusline+=[%{&fileformat}]
+" 文字コード表示
+set statusline+=[%{has('multi_byte')&&\&fileencoding!=''?&fileencoding:&encoding}]
+" ファイルタイプ表示
+set statusline+=%y
+" ここからツールバー右側
+set statusline+=%=
+" 現在文字行/全体行表示
+set statusline+=[L=%l/%L]
+" 現在行が全体行の何%目か表示
+set statusline+=[%p%%]
