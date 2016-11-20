@@ -23,6 +23,8 @@ set showmatch
 set wildmode=list:longest
 
 " Tab系
+" tabはスペースにする
+set expandtab
 " 行頭以外のTab文字の表示幅（スペースいくつ分）
 set tabstop=2
 " 行頭でのTab文字の表示幅
