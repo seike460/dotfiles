@@ -8,6 +8,24 @@ autoload -Uz colors && colors
 autoload -Uz compinit && compinit -u
 autoload -Uz is-at-least
 
+# prompt
+tmp_prompt="%{${fg[cyan]}%}%n%# %{${reset_color}%}"
+tmp_prompt2="%{${fg[cyan]}%}%_> %{${reset_color}%}"
+tmp_rprompt="%{${fg[green]}%}[%~]%{${reset_color}%}"
+tmp_sprompt="%{${fg[yellow]}%}%r is correct? [Yes, No, Abort, Edit]:%{${reset_color}%}"
+
+if [ ${UID} -eq 0 ]; then
+    tmp_prompt="%B%U${tmp_prompt}%u%b"
+    tmp_prompt2="%B%U${tmp_prompt2}%u%b"
+    tmp_rprompt="%B%U${tmp_rprompt}%u%b"
+    tmp_sprompt="%B%U${tmp_sprompt}%u%b"
+fi
+
+PROMPT=$tmp_prompt
+PROMPT2=$tmp_prompt2
+RPROMPT=$tmp_rprompt
+SPROMPT=$tmp_sprompt
+
 # Editor
 export EDITOR=vim
 export CVSEDITOR="${EDITOR}"
@@ -20,14 +38,14 @@ export LS_COLORS='di=36;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # History
-# History file
 export HISTFILE=~/.zsh_history
-# History size in memory
 export HISTSIZE=10000
-# The number of histsize
 export SAVEHIST=1000000
-# The size of asking history
 export LISTMAX=50
+setopt hist_ignore_all_dups
+setopt hist_reduce_blanks
+setopt extended_glob
+
 # Do not add in root
 if [[ $UID == 0 ]]; then
     unset HISTFILE
