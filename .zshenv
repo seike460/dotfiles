@@ -51,3 +51,6 @@ if [[ $UID == 0 ]]; then
     unset HISTFILE
     export SAVEHIST=0
 fi
+
+# Key bindをemacsmode
+bindkey -e

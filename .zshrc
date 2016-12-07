@@ -17,3 +17,7 @@ alias rm_docker_images='docker images -qf dangling=true | xargs docker rmi'
 alias rm_docker_containers='docker ps -aqf status=exited | xargs docker rm -v' # rm with volumes
 alias rm_docker_volumes='docker volume ls -qf dangling=true | xargs docker volume rm'
 alias rm_docker_compose_containers='docker-compose rm -fv'
+
+if [ $SHLVL = 1 ]; then
+	tmux
+fi
