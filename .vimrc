@@ -47,7 +47,8 @@ set hlsearch
 " ESC連打でハイライト解除
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
-" 色系
+" 色系 on
+syntax enable
 " カラースキーム
 colorscheme ron
 " ダーク系のカラースキームを使う
