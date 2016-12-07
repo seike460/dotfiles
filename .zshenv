@@ -54,3 +54,4 @@ fi
 
 # Key bindをemacsmode
 bindkey -e
+

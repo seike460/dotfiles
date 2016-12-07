@@ -21,3 +21,5 @@ alias rm_docker_compose_containers='docker-compose rm -fv'
 if [ $SHLVL = 1 ]; then
 	tmux
 fi
+
+export PATH=$PATH:~/bin
