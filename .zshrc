@@ -5,6 +5,7 @@ alias ll='ls -lt'
 
 # My Dirs
 alias cdvar='cd ~/var'
+alias code='cd ~/var/code'
 alias cdev='cd ~/var/dev'
 alias cdocker='cd ~/var/Dockerfiles'
 alias cdvagrant='cd ~/var/Vagrantfiles'
@@ -23,3 +24,4 @@ if [ $SHLVL = 1 ]; then
 fi
 
 export PATH=$PATH:~/bin
+export PATH=$PATH:/usr/local/opt/go/libexec/bin

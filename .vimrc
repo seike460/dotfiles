@@ -24,12 +24,12 @@ set wildmode=list:longest
 
 " Tab系
 " tabはスペースにする
-" set expandtab
+ set expandtab
 " 行頭以外のTab文字の表示幅（スペースいくつ分）
-set tabstop=2
+set tabstop=4
 " 行頭でのTab文字の表示幅
-set shiftwidth=2
-set softtabstop=2
+set shiftwidth=4
+set softtabstop=4
 set autoindent
 set smartindent
 
@@ -81,3 +81,10 @@ set statusline+=%=
 set statusline+=[L=%l/%L]
 " 現在行が全体行の何%目か表示
 set statusline+=[%p%%]
+
+" php dict
+autocmd FileType php,ctp :set dictionary=~/.vim/dict/php.dict
+
+highlight Pmenu ctermbg=6
+highlight PmenuSel ctermbg=3
+highlight PMenuSbar ctermbg=1
