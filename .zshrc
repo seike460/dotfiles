@@ -23,5 +23,7 @@ if [ $SHLVL = 1 ]; then
 	tmux
 fi
 
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
 export PATH=$PATH:~/bin
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
