@@ -1,3 +1,7 @@
+if filereadable(expand('~/.vimrc.dein'))
+    source ~/.vimrc.dein
+endif
+
 " setting
 "文字コードをUFT-8に設定
 set fenc=utf-8
@@ -24,7 +28,7 @@ set wildmode=list:longest
 
 " Tab系
 " tabはスペースにする
- set expandtab
+set expandtab
 " 行頭以外のTab文字の表示幅（スペースいくつ分）
 set tabstop=4
 " 行頭でのTab文字の表示幅
