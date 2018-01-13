@@ -1,8 +1,7 @@
-if filereadable(expand('~/.vimrc.dein'))
-    source ~/.vimrc.dein
-endif
+"""""""""""""""""""""""""""""""""""
+" 基本設定
+"""""""""""""""""""""""""""""""""""
 
-" setting
 "文字コードをUFT-8に設定
 set fenc=utf-8
 " バックアップファイルを作らない
@@ -13,12 +12,6 @@ set noswapfile
 set autoread
 " バッファが編集中でもその他のファイルを開けるように
 set hidden
-" 入力中のコマンドをステータスに表示する
-set showcmd
-
-" 見た目系
-" インデントはスマートインデント
-set smartindent
 " ビープ音を可視化
 set visualbell
 " 括弧入力時の対応する括弧を表示
@@ -26,7 +19,14 @@ set showmatch
 " コマンドラインの補完
 set wildmode=list:longest
 
-" Tab系
+"""""""""""""""""""""""""""""""""""
+" インデント設定
+"""""""""""""""""""""""""""""""""""
+
+" インデントはスマートインデント
+set smartindent
+" オートインデント
+set autoindent
 " tabはスペースにする
 set expandtab
 " 行頭以外のTab文字の表示幅（スペースいくつ分）
@@ -34,10 +34,11 @@ set tabstop=4
 " 行頭でのTab文字の表示幅
 set shiftwidth=4
 set softtabstop=4
-set autoindent
-set smartindent
 
-" 検索系
+"""""""""""""""""""""""""""""""""""
+" 検索設定
+"""""""""""""""""""""""""""""""""""
+
 " 検索文字列が小文字の場合は大文字小文字を区別なく検索する
 set ignorecase
 " 検索文字列に大文字が含まれている場合は区別して検索する
@@ -51,24 +52,21 @@ set hlsearch
 " ESC連打でハイライト解除
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
-" 色系 on
-syntax enable
-" カラースキーム
-colorscheme ron
-" ダーク系のカラースキームを使う
-set background=dark
+"""""""""""""""""""""""""""""""""""
+" ステータスライン設定
+"""""""""""""""""""""""""""""""""""
 
-" ステータスライン系
 " ステータスラインにコマンドを表示
 set showcmd
 " ステータスラインを常に表示
 set laststatus=2
 " ファイルナンバー表示
 set statusline=[%n]
-" ホスト名表示
-set statusline+=%{matchstr(hostname(),'\\w\\+')}@
 " ファイル名表示
 set statusline+=%<%F
+
+" ここからツールバー右側
+set statusline+=%=
 " 変更のチェック表示
 set statusline+=%m
 " 読み込み専用かどうか表示
@@ -79,16 +77,33 @@ set statusline+=[%{&fileformat}]
 set statusline+=[%{has('multi_byte')&&\&fileencoding!=''?&fileencoding:&encoding}]
 " ファイルタイプ表示
 set statusline+=%y
-" ここからツールバー右側
-set statusline+=%=
 " 現在文字行/全体行表示
 set statusline+=[L=%l/%L]
 " 現在行が全体行の何%目か表示
 set statusline+=[%p%%]
+" 入力中のコマンドをステータスに表示する
+set showcmd
 
-" php dict
-autocmd FileType php,ctp :set dictionary=~/.vim/dict/php.dict
+"""""""""""""""""""""""""""""""""""
+" 個別設定読込
+"""""""""""""""""""""""""""""""""""
+for f in split(glob("~/.vim/vimrc/*.vimrc"), "\n")
+    exe "source" f
+endfor
 
-highlight Pmenu ctermbg=6
-highlight PmenuSel ctermbg=3
+"""""""""""""""""""""""""""""""""""
+" 色設定
+"""""""""""""""""""""""""""""""""""
+
+" 色設定を有効にする
+syntax enable
+" カラースキーム
+colorscheme molokai
+" ダーク系のカラースキームを使う
+set background=dark
+" コメントはlightgreen
+hi Comment ctermfg=lightgreen
+" 選択肢の色
+highlight Pmenu ctermbg=4
+highlight PmenuSel ctermbg=1
 highlight PMenuSbar ctermbg=1
