@@ -27,6 +27,8 @@ call dein#add('zchee/deoplete-go')
 call dein#add('kana/vim-operator-user')
 call dein#add('tyru/operator-camelize.vim')
 call dein#add('ctrlpvim/ctrlp.vim')
+call dein#add('soramugi/auto-ctags.vim')
+call dein#add('rking/ag.vim')
 
 call dein#end()
 

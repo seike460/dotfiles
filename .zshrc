@@ -62,3 +62,13 @@ zle -N peco-history-selection
 bindkey '^R' peco-history-selection
 
 alias venv='source ~/.anyenv/envs/pyenv/venv/$(ls ~/.anyenv/envs/pyenv/venv/ | peco)/bin/activate'
+
+function peco-tree-vim(){
+    local SELECTED_FILE=$(find . | peco)
+    if [ ! -z "$SELECTED_FILE" ]; then
+        BUFFER="vim $SELECTED_FILE"
+        zle accept-line
+    fi
+}
+zle -N peco-tree-vim
+bindkey "^v" peco-tree-vim

@@ -85,6 +85,46 @@ set statusline+=[%p%%]
 set showcmd
 
 """""""""""""""""""""""""""""""""""
+" ctags設定
+"""""""""""""""""""""""""""""""""""
+" ctags自動保存
+let g:auto_ctags = 1
+let g:auto_ctags_directory_list = ['.git']
+let g:auto_ctags_tags_args = '--tag-relative --recurse --sort=yes'
+set tags+=.git/tags
+" tagsジャンプの時に複数ある時は一覧表示
+nnoremap <C-h :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
+nnoremap <C-j :split<CR> :exe("tjump ".expand('<cword>'))<CR>
+"""""""""""""""""""""""""""""""""""
+" ctrlp設定
+"""""""""""""""""""""""""""""""""""
+
+" キャッシュディレクトリ
+"let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
+" キャッシュを終了時に削除しない
+"let g:ctrlp_clear_cache_on_exit = 0
+
+" 遅延再描画
+let g:ctrlp_lazy_update = 1
+" ルートパスと認識させるためのファイル
+let g:ctrlp_root_markers = ['Gemfile', 'pom.xml', 'build.xml']
+" CtrlPのウィンドウ最大高さ
+let g:ctrlp_max_height = 20
+" 無視するディレクトリ
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|vendor)$',
+    \ 'file': '\v\.(exe|so|dll)$',
+    \ 'link': 'some_bad_symbolic_links',
+\ }
+
+nnoremap <C-e> :NERDTree<CR>
+
+if executable('ag')
+    let g:ctrlp_use_caching=0
+    let g:ctrlp_user_command='ag %s -i --nocolor --nogroup -g ""'
+endif
+
+"""""""""""""""""""""""""""""""""""
 " 個別設定読込
 """""""""""""""""""""""""""""""""""
 for f in split(glob("~/.vim/vimrc/*.vimrc"), "\n")
