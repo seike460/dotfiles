@@ -11,7 +11,7 @@ let php_parent_error_close = 1
 let php_parent_error_open = 1
 " php dict
 autocmd FileType php,ctp :set dictionary=~/.vim/dict/php.dict
-
+autocmd BufNewFile,BufRead *.ctp set filetype=ctp
 
 " php indent
 augroup vimrc-filetype
@@ -22,18 +22,6 @@ augroup vimrc-filetype
   " .ctp -> indent 2
   autocmd BufNewFile,BufRead *.ctp set filetype=ctp
   autocmd FileType ctp setlocal expandtab tabstop=2 softtabstop=2 shiftwidth=2
-augroup END
-
-" phpLint
-function! s:PHPLint()
-  let s:result = system('php -l ' . bufname(""))
-  let s:count = split(s:result, "\n")
-  echo s:result
-endfunction
-
-augroup php-lint
-  autocmd!
-  autocmd BufWritePost *.php call <SID>PHPLint()
 augroup END
 
 map <Leader>c <Plug>(operator-camelize)

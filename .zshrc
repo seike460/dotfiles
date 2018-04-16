@@ -1,5 +1,3 @@
-
-
 # ls
 alias ls='ls -GF'
 alias l='ls -ltr'
@@ -20,11 +18,11 @@ alias rm_docker_volumes='docker volume ls -qf dangling=true | xargs docker volum
 alias rm_docker_compose_containers='docker-compose.backup rm -fv'
 
 # github
-alias g='cd ~/.ghq/$(ghq list | peco)'
+alias g='cd ~/src/$(ghq list | peco)'
 alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
 alias gitdiff='git difftool --tool=vimdiff --no-prompt'
 alias gitlog='git log --graph'
-alias git_co_allowempty='git commit --allow-empty'
+alias ga='git commit --allow-empty'
 function git(){hub "$@"} # zsh
 
 # tmux
@@ -36,8 +34,6 @@ fi
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 
 export PATH=$PATH:~/bin
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$PATH
 
 complete-ssh-host() {
     local host="$(command egrep -i '^Host\s+.+' $HOME/.ssh/config $(find $HOME/.ssh/conf.d -type f 2>/dev/null) | command egrep -v '[*?]' | awk '{print $2}' | sort | peco)"
@@ -50,7 +46,6 @@ zle -N complete-ssh-host
 bindkey '^s^s' complete-ssh-host
 
 HISTSIZE=500000
-
 
 function peco-history-selection() {
     BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
@@ -72,3 +67,8 @@ function peco-tree-vim(){
 }
 zle -N peco-tree-vim
 bindkey "^v" peco-tree-vim
+
+export GOPATH=$HOME
+export PATH=$GOPATH/bin:$PATH
+export PATH="$HOME/.anyenv/envs/goenv/bin:$PATH"
+eval "$(goenv init -)"

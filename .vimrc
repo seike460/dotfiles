@@ -19,6 +19,7 @@ set showmatch
 " コマンドラインの補完
 set wildmode=list:longest
 
+
 """""""""""""""""""""""""""""""""""
 " インデント設定
 """""""""""""""""""""""""""""""""""
@@ -117,7 +118,7 @@ let g:ctrlp_custom_ignore = {
     \ 'link': 'some_bad_symbolic_links',
 \ }
 
-nnoremap <C-e> :NERDTree<CR>
+map <C-n> :NERDTreeToggle<CR>
 
 if executable('ag')
     let g:ctrlp_use_caching=0
@@ -147,3 +148,15 @@ hi Comment ctermfg=lightgreen
 highlight Pmenu ctermbg=4
 highlight PmenuSel ctermbg=1
 highlight PMenuSbar ctermbg=1
+
+nmap <c-l> :BufExplorer<CR>
+
+augroup config-github-complete
+    autocmd!
+    autocmd FileType gitcommit setl omnifunc=github_complete#complete
+augroup END
+
+nnoremap <silent> <Space>f :Gtags -f %<CR>
+nnoremap <silent> <Space>j :GtagsCursor<CR>
+nnoremap <silent> <Space>d :<C-u>exe('Gtags '.expand('<cword>'))<CR>
+nnoremap <silent> <Space>r :<C-u>exe('Gtags -r '.expand('<cword>'))<CR>
