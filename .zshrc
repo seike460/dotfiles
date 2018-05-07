@@ -4,11 +4,10 @@ alias l='ls -ltr'
 alias ll='ls -lt'
 
 # My Dirs
-alias cdocker='cd ~/var/Dockerfiles/$(ls ~/var/Dockerfiles/ | peco)'
+alias d='cd ~/var/Dockerfiles/$(ls ~/var/Dockerfiles/ | peco)'
 alias v='cd ~/vagrant/$(ls ~/vagrant | peco)'
 
 # docker Command
-alias d='docker'
 alias de='docker exec -it $(docker ps | peco | cut -d " " -f 1) /bin/bash'
 alias dc='docker-compose' # sorry ex-dc...
 alias dc_build_up='docker-compose rm -fv && docker-compose build && docker-compose up'
@@ -58,15 +57,27 @@ bindkey '^R' peco-history-selection
 
 alias venv='source ~/.anyenv/envs/pyenv/venv/$(ls ~/.anyenv/envs/pyenv/venv/ | peco)/bin/activate'
 
-function peco-tree-vim(){
-    local SELECTED_FILE=$(find . | peco)
+function peco-tree-vim-igunore-vendor(){
+    local SELECTED_FILE=$(find . -type f -not -path "./vendor/*" -not -path "./.*"| peco)
     if [ ! -z "$SELECTED_FILE" ]; then
         BUFFER="vim $SELECTED_FILE"
         zle accept-line
     fi
 }
+
+zle -N peco-tree-vim-igunore-vendor
+bindkey "^v" peco-tree-vim-igunore-vendor
+
+function peco-tree-vim(){
+    local ALL_SELECTED_FILE=$(find . -type f | peco)
+    if [ ! -z "$ALL_SELECTED_FILE=$" ]; then
+        BUFFER="vim $ALL_SELECTED_FILE=$"
+        zle accept-line
+    fi
+}
+
 zle -N peco-tree-vim
-bindkey "^v" peco-tree-vim
+bindkey "^b" peco-tree-vim
 
 export GOPATH=$HOME
 export PATH=$GOPATH/bin:$PATH
