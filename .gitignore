@@ -1,2 +1,6 @@
 .vim/dein
+.vim/autoload
+.vim/bundle
+.vim/ftdetect
+.vim/plugged
 .vim/.netrwhist
