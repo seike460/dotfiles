@@ -32,21 +32,25 @@ call plug#begin(expand('~/.vim/plugged'))
 "" Plug install packages
 "*****************************************************************************
 Plug 'Raimondi/delimitMate'
+Plug 'elixir-editors/vim-elixir'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'avelino/vim-bootstrap-updater'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'majutsushi/tagbar'
-Plug 'rking/ag.vim'
-Plug 'lighttiger2505/gtags.vim'
 Plug 'jsfaint/gen_tags.vim'
+Plug 'lighttiger2505/gtags.vim'
+Plug 'majutsushi/tagbar'
+Plug 'mattn/webapi-vim'
+Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'sheerun/vim-polyglot'
+Plug 'tobyS/vmustache'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tsuyoshiwada/slack-memo-vim' | Plug 'mattn/webapi-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/CSApprox'
@@ -142,8 +146,8 @@ set softtabstop=0
 set shiftwidth=4
 set expandtab
 
-"" Map leader to ,
-let mapleader=','
+"" Map leader to Space
+let mapleader = "\<Space>"
 
 "" Enable hidden buffers
 set hidden
@@ -539,7 +543,8 @@ augroup END
 " html
 " for html files, 2 spaces
 autocmd Filetype html setlocal ts=2 sw=2 expandtab
-
+autocmd Filetype vue setlocal ts=2 sw=2 expandtab
+autocmd BufNewFile,BufRead *.ctp set filetype=php ts=2 sw=2 expandtab
 
 " javascript
 let g:javascript_enable_domhtmlcss = 1
@@ -652,3 +657,8 @@ let g:Gtags_OpenQuickfixWindow = 1
 nmap <silent> K :<C-u>exe("Gtags ".expand('<cword>'))<CR>
 " Show reference of cousor word on quickfix
 nmap <silent> R :<C-u>exe("Gtags -r ".expand('<cword>'))<CR>
+
+" x not yank
+nnoremap x "_x
+
+source ~/.vimrc.local
